@@ -1,0 +1,5 @@
+# Private files containing keys
+*.gpg
+colloquy.backup
+ssh.tar
+.DS_Store
