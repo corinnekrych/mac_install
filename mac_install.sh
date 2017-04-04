@@ -145,6 +145,18 @@ if [ ! -d "$HOME/.nvm" ]; then
 	nvm alias default v6.5.0
 fi
 
+# Install HP scan for printer/scanner
+echo "==> Install Printer"
+if [ ! -f HP-Inkjet-SW-OSX-Mavericks_v12.34.42.dmg ]; then
+	wget http://ftp.hp.com/pub/softlib/software12/COL51745/mp-125206-3/HP-Inkjet-SW-OSX-Mavericks_v12.34.42.dmg
+	hdiutil attach HP-Inkjet-SW-OSX-Mavericks_v12.34.42.dmg
+	pushd "/Volumes/HP Inkjet SW OSX Mavericks"
+	sudo installer -pkg "HP Inkjet SW OSX Mavericks.pkg" -target "/"
+	hdiutil detach "/Volumes/HP Inkjet SW OSX Mavericks"
+	popd
+fi
+
+
 # Set-up GPG, SSH Keys
 if [ -f "./gpg_pub.gpg" ]; then
 	echo "==> Set-up GPG key"
