@@ -93,6 +93,7 @@ function brew_install() {
 }
 echo "after function definition"
 cask_install java
+brew_install p7zip
 brew_install wget 
 brew_install ack 
 brew_install maven

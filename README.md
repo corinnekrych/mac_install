@@ -45,4 +45,3 @@ clone_repo "feedhenry"
 ```
 . ./mac_install.sh
 ```
-use “dot space dot slash”, to execute the script in the current shell without forking a sub shell.
