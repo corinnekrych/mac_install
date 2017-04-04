@@ -111,6 +111,7 @@ cask_install mattermost mattermost
 cask_install intellij-idea "intelliJ IDEA"
 cask_install webstorm webstorm
 cask_install slack slack
+cask_install virtualbox virtualbox
 if ! app_is_installed_cask 'blue-jeans-launcher'; then
 	echo "==> Setup for BlueJeans app"
 	brew cask install blue-jeans-launcher
@@ -154,6 +155,23 @@ if [ ! -f HP-Inkjet-SW-OSX-Mavericks_v12.34.42.dmg ]; then
 	sudo installer -pkg "HP Inkjet SW OSX Mavericks.pkg" -target "/"
 	hdiutil detach "/Volumes/HP Inkjet SW OSX Mavericks"
 	popd
+fi
+
+# Install with mas
+if ! app_is_installed 'Xcode'; then
+	echo "= Enter your AppleID:" 
+	read APPLE_ID
+	echo "==> Enter your Apple ID’s password: $APPLE_ID"
+	read -s PASSWORD
+	mas signin $APPLE_ID "$PASSWORD"
+	echo "==> Install Xcode"
+	install "Xcode"
+fi
+
+# Install with gem
+if [ ! -d "$HOME/.cocoapods" ]; then
+	echo "==> Install CocoaPods"
+	sudo gem install cocoapods
 fi
 
 
@@ -218,23 +236,6 @@ echo "==> Clone devtools platform repos"
 clone_repo "devtools"
 echo "==> Clone corinnekrych repos"
 clone_repo "corinne"
-
-# Install with mas
-if ! app_is_installed 'Xcode'; then
-	echo "= Enter your AppleID:" 
-	read APPLE_ID
-	echo "==> Enter your Apple ID’s password: $APPLE_ID"
-	read -s PASSWORD
-	mas signin $APPLE_ID "$PASSWORD"
-	echo "==> Install Xcode"
-	install "Xcode"
-fi
-
-# Install with gem
-if [ ! -d "$HOME/.cocoapods" ]; then
-	echo "==> Install CocoaPods"
-	sudo gem install cocoapods
-fi
 
 # Finder 
 echo "==> Set-up Finder"
