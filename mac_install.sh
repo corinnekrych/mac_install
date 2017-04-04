@@ -112,6 +112,7 @@ cask_install intellij-idea "intelliJ IDEA"
 cask_install webstorm webstorm
 cask_install slack slack
 cask_install virtualbox virtualbox
+cask_install visual-studio-code "Visual Studio Code"
 if ! app_is_installed_cask 'blue-jeans-launcher'; then
 	echo "==> Setup for BlueJeans app"
 	brew cask install blue-jeans-launcher
