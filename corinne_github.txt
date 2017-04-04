@@ -1,0 +1,2 @@
+git@github.com:corinnekrych/swift-rpm.git
+git@github.com:corinnekrych/swift.git

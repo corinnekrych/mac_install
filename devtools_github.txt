@@ -1,0 +1,8 @@
+git@github.com:fabric8io/fabric8-ui.git
+git@github.com:fabric8io/fabric8-planner.git
+git@github.com:fabric8-ui/fabric8-runtime-console.git
+git@github.com:fabric8-ui/fabric8-recommender.git
+git@github.com:fabric8-ui/ngx-fabric8-wit.git
+git@github.com:fabric8-ui/ngx-login-client.git
+git@github.com:fabric8-ui/ngx-widgets.git
+git@github.com:fabric8-ui/ngx-base.git

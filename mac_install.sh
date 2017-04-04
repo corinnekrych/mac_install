@@ -216,6 +216,8 @@ echo "==> Clone feedhenry repos"
 clone_repo "feedhenry"
 echo "==> Clone devtools platform repos"
 clone_repo "devtools"
+echo "==> Clone corinnekrych repos"
+clone_repo "corinne"
 
 # Install with mas
 if ! app_is_installed 'Xcode'; then
