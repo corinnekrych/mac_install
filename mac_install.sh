@@ -114,6 +114,7 @@ cask_install webstorm webstorm
 cask_install slack slack
 cask_install virtualbox virtualbox
 cask_install visual-studio-code "Visual Studio Code"
+cask_install docker
 if ! app_is_installed_cask 'blue-jeans-launcher'; then
 	echo "==> Setup for BlueJeans app"
 	brew cask install blue-jeans-launcher
@@ -148,6 +149,16 @@ if [ ! -d "$HOME/.nvm" ]; then
 	nvm alias default v6.5.0
 fi
 
+# Install OpenShift OC
+# TODO configure docker to add "insecure-registries" : ["172.30.0.0/16"]
+# TODO once available for 3.6.0-alpa0, use: https://github.com/Homebrew/homebrew-core/blob/master/Formula/openshift-cli.rb
+if [ ! -d "/usr/local/oc" ]; then
+	brew install socat #dependency for oc
+	wget https://github.com/openshift/origin/releases/download/v3.6.0-alpha.0/openshift-origin-client-tools-v3.6.0-alpha.0-0343989-mac.zip
+	sudo unzip openshift-origin-client-tools-v3.6.0-alpha.0-0343989-mac.zip -d /usr/local/oc
+	ln -s /usr/local/oc/oc /usr/local/bin/oc
+fi
+
 # Install HP scan for printer/scanner
 echo "==> Install Printer"
 if [ ! -f HP-Inkjet-SW-OSX-Mavericks_v12.34.42.dmg ]; then
@@ -175,7 +186,6 @@ if [ ! -d "$HOME/.cocoapods" ]; then
 	echo "==> Install CocoaPods"
 	sudo gem install cocoapods
 fi
-
 
 # Set-up GPG, SSH Keys
 if [ -f "./gpg_pub.gpg" ]; then
