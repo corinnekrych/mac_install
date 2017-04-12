@@ -14,6 +14,7 @@ fi
 # Install cask for brew
 echo "==> Install Cask"
 brew tap caskroom/cask
+brew tap caskroom/versions
 
 # Update brew
 echo "==> Update Homebrew"
@@ -83,7 +84,7 @@ function brew_install() {
 	if ! app_is_installed_homebrew $1; then
 		if ! app_is_installed $1; then
 			echo "==> Install $1"
-			brew cask install $1
+			brew install $1
 			if [[ $2 ]]; then 
 				echo "==>==> Dock $2"
 				defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/$2.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
@@ -91,7 +92,6 @@ function brew_install() {
 		fi
 	fi
 }
-echo "after function definition"
 cask_install java
 brew_install p7zip
 brew_install wget 
@@ -100,6 +100,12 @@ brew_install maven
 brew_install gpg 
 brew_install zsh zsh-completions 
 brew_install git
+brew_install go
+brew_install glide
+brew_install mercurial
+brew_install bazaar
+brew_install glide
+cask_install gogland-eap "Gogland 1.0 EAP"
 cask_install iterm2 
 cask_install sublime-text 
 cask_install atom atom
@@ -115,6 +121,14 @@ cask_install slack slack
 cask_install virtualbox virtualbox
 cask_install visual-studio-code "Visual Studio Code"
 cask_install docker
+
+
+if [ ! -d "$HOME/workspace/go" ]; then
+	echo "==> Setup GO"
+	mkdir -p $HOME/workspace/go
+	append_to_file "$HOME/.zshrc" 'export GOPATH=$HOME/workspace/go'
+fi
+
 if ! app_is_installed_cask 'blue-jeans-launcher'; then
 	echo "==> Setup for BlueJeans app"
 	brew cask install blue-jeans-launcher
@@ -127,16 +141,16 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 	chsh -s $(which zsh)
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
+
 # Install rvm
 if [ ! -d "$HOME/.rvm" ]; then
 	echo "==> Install rvm"
 	curl -L https://get.rvm.io | bash -s stable
 	. ~/.bash_profile
 	rvm install 2.3.0 --disable-binary
-# TODO rvm --default use 2.3.0
-# TODO to import GPG curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
-# Install JavaScript environment
 fi
+
+# Install JavaScript environment
 if [ ! -d "$HOME/.nvm" ]; then
 	echo "==> Install nvm"
 	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
@@ -152,13 +166,20 @@ fi
 # Install OpenShift OC
 # TODO configure docker to add "insecure-registries" : ["172.30.0.0/16"]
 # TODO once available for 3.6.0-alpa0, use: https://github.com/Homebrew/homebrew-core/blob/master/Formula/openshift-cli.rb
+# if [ ! -d "/usr/local/oc" ]; then
+#   echo "==> Install Openshift oc"
+# 	brew install socat #dependency for oc
+# 	wget https://github.com/openshift/origin/releases/download/v3.6.0-alpha.0/openshift-origin-client-tools-v3.6.0-alpha.0-0343989-mac.zip
+# 	sudo unzip openshift-origin-client-tools-v3.6.0-alpha.0-0343989-mac.zip -d /usr/local/oc
+# 	ln -s /usr/local/oc/oc /usr/local/bin/oc
+# fi
 if [ ! -d "/usr/local/oc" ]; then
+	echo "==> Install Openshift oc"
 	brew install socat #dependency for oc
-	wget https://github.com/openshift/origin/releases/download/v3.6.0-alpha.0/openshift-origin-client-tools-v3.6.0-alpha.0-0343989-mac.zip
-	sudo unzip openshift-origin-client-tools-v3.6.0-alpha.0-0343989-mac.zip -d /usr/local/oc
+	wget https://github.com/openshift/origin/releases/download/v1.4.1/openshift-origin-client-tools-v1.4.1-3f9807a-mac.zip
+	sudo unzip openshift-origin-client-tools-v1.4.1-3f9807a-mac.zip -d /usr/local/oc
 	ln -s /usr/local/oc/oc /usr/local/bin/oc
 fi
-
 # Install HP scan for printer/scanner
 echo "==> Install Printer"
 if [ ! -f HP-Inkjet-SW-OSX-Mavericks_v12.34.42.dmg ]; then
@@ -216,8 +237,7 @@ if [ -f "./colloquy.backup" ]; then
 fi
 
 # Set-up workspace with relevant git repos
-function clone_repo () {
-    
+function clone_repo () {    
     repos=() # Create array
     while IFS= read -r line # Read a line
     do
@@ -226,18 +246,28 @@ function clone_repo () {
 
 	current_dir=$(pwd)
 	echo "==> Create workspace"
-	mkdir -p ~/workspace
 	mkdir -p ~/workspace/$1
 	cd ~/workspace/$1
 	for repo in ${repos[@]}
 	do
 		last_string=$(echo $repo| cut -d'/' -f 2)
-		repo_directory=$(echo $last_string| cut -d'.' -f 1)
-		if [ ! -d "$repo_directory" ]; then
-			echo "==> Clone $repo"
-			git clone $repo
+		repo_directory=$(echo $last_string| cut -d'.' -f 1)	
+		if [ $1 == "go" ]; then
+			tmp_string=$(echo $repo| cut -d':' -f 2)
+		    github_org=$(echo $tmp_string| cut -d'/' -f 1)	
+			if [ ! -d "src/github.com/$github_org/$repo_directory" ]; then
+				echo "==> Clone GO repo: $repo with github $github_org and repo directory $repo_directory"
+				git clone $repo ~/workspace/go/src/github.com/$github_org/$repo_directory
+			else
+				echo "==> GO Directory $repo_directory already created with github $github_org and repo directory $repo_directory."
+			fi
 		else
-		echo "==> Directory $repo_directory already created."
+			if [ ! -d "$repo_directory" ]; then
+				echo "==> Clone $repo"
+				git clone $repo
+			else
+		    	echo "==> Directory $repo_directory already created."
+			fi
 		fi
 	done
 	cd  $current_dir
@@ -248,6 +278,8 @@ echo "==> Clone devtools platform repos"
 clone_repo "devtools"
 echo "==> Clone corinnekrych repos"
 clone_repo "corinne"
+echo "==> Clone go repos"
+clone_repo "go"
 
 # Finder 
 echo "==> Set-up Finder"

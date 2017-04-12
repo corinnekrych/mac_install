@@ -1,4 +1,5 @@
 git@github.com:feedhenry-templates/helloworld-cloud.git
+git@github.com:feedhenry-templates/helloworld-cloud-cluster.git
 git@github.com:feedhenry-templates/helloworld-app.git
 git@github.com:feedhenry-templates/helloworld-android-gradle.git
 git@github.com:feedhenry-templates/helloworld-ios.git
@@ -41,3 +42,4 @@ git@github.com:feedhenry/fh-js-sdk.git
 git@github.com:feedhenry/fh-ios-sdk.git
 git@github.com:feedhenry/fh-ios-swift-sdk.git
 git@github.com:feedhenry/fh-android-sdk.git
+git@github.com:feedhenry-templates/appforms-datasources-mongodb.git
