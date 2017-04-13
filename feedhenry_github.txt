@@ -16,6 +16,7 @@ git@github.com:feedhenry-templates/pushstarter-android-app.git
 git@github.com:feedhenry-templates/pushstarter-cordova-app.git
 git@github.com:feedhenry-templates/pushstarter-xamarin-app.git
 git@github.com:feedhenry-templates/pushstarter-ios-swift.git
+git@github.com:feedhenry-templates/hello-push-cloud.git
 git@github.com:feedhenry-templates/welcome-app.git
 git@github.com:feedhenry-templates/welcome-cloud.git
 git@github.com:feedhenry-templates/welcome-android.git

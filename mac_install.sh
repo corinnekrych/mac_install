@@ -19,11 +19,11 @@ brew tap caskroom/versions
 # Update brew
 echo "==> Update Homebrew"
 brew update
-brew upgrade brew-cask
+#brew upgrade brew-cask
 
 # Install mas (Mac App Store)
 echo "==> Install mas for Mac App Store."
-brew install mas
+brew_install mas
 
 
 # Function to install from App Store with mas (source : https://github.com/argon/mas/issues/41#issuecomment-245846651)
@@ -210,24 +210,28 @@ fi
 
 # Set-up GPG, SSH Keys
 if [ -f "./gpg_pub.gpg" ]; then
-	echo "==> Set-up GPG key"
-	gpg --import ./gpg_pub.gpg
-	gpg --allow-secret-key-import --import ./gpg_sec.gpg 
-	# TODO replace FD8D377A with your GPG key
-	echo "$( \
-	   gpg --list-keys --fingerprint \
-	   | grep FD8D377A -A 1 | tail -1 \
-	   | tr -d '[:space:]' | awk 'BEGIN { FS = "=" } ; { print $2 }' \
-	 ):6:" | gpg --import-ownertrust;
+	if [ ! -d "$HOME/.gnupg" ]; then
+		echo "==> Set-up GPG key"
+		gpg --import ./gpg_pub.gpg
+		gpg --allow-secret-key-import --import ./gpg_sec.gpg 
+		# TODO replace FD8D377A with your GPG key
+		echo "$( \
+	   		gpg --list-keys --fingerprint \
+	   		| grep FD8D377A -A 1 | tail -1 \
+	   		| tr -d '[:space:]' | awk 'BEGIN { FS = "=" } ; { print $2 }' \
+	 	):6:" | gpg --import-ownertrust;
+	fi
 fi
 
 # Set-up SSH
 if [ -f "./ssh.tar" ]; then
-	echo "==> Set-up .ssh"
-	tar xvpf ./ssh.tar --directory ~
-	echo "==> Set-up git"
- 	git config --global user.name "Corinne Krych"
- 	git config --global user.email corinnekrych@gmail.com
+	if [ ! -d "$HOME/.ssh" ]; then
+		echo "==> Set-up .ssh"
+		tar xvpf ./ssh.tar --directory ~
+		echo "==> Set-up git"
+ 		git config --global user.name "Corinne Krych"
+ 		git config --global user.email corinnekrych@gmail.com
+	 fi
 fi
 
 # Set-up chat, irc
@@ -245,7 +249,7 @@ function clone_repo () {
     done < "$1_github.txt"
 
 	current_dir=$(pwd)
-	echo "==> Create workspace"
+	echo "==> Create workspace for $1"
 	mkdir -p ~/workspace/$1
 	cd ~/workspace/$1
 	for repo in ${repos[@]}
