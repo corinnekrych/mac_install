@@ -44,3 +44,14 @@ git@github.com:feedhenry/fh-ios-sdk.git
 git@github.com:feedhenry/fh-ios-swift-sdk.git
 git@github.com:feedhenry/fh-android-sdk.git
 git@github.com:feedhenry-templates/appforms-datasources-mongodb.git
+git@github.com:feedhenry-templates/fh-connector-sendgrid-cloud.git
+git@github.com:feedhenry-templates/fh-connector-twilio-cloud.git
+git@github.com:feedhenry-templates/fh-connector-mongodb-cloud.git
+git@github.com:feedhenry-templates/fh-connector-sap-netweaver-cloud.git
+git@github.com:feedhenry-templates/fh-connector-paypal-cloud.git
+git@github.com:feedhenry-templates/fh-mbaas-service.git
+git@github.com:feedhenry-templates/saml-service.git
+git@github.com:feedhenry-templates/fh-health-monitor.git
+git@github.com:feedhenry-templates/barcode-reader-service.git
+git@github.com:feedhenry-templates/fh-connector-stripe-cloud.git
+git@github.com:feedhenry-templates/fh-connector-amazon-ses-cloud.git
