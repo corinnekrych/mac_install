@@ -1,3 +1,4 @@
 git@github.com:corinnekrych/swift-rpm.git
 git@github.com:corinnekrych/swift.git
 git@github.com:FroMage/RivieraDEV.git
+git@github.com:corinnekrych/prism-for-blogspot.git
