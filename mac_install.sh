@@ -113,6 +113,9 @@ cask_install firefox firefox
 cask_install dropbox 
 cask_install colloquy colloquy
 cask_install google-chrome "Google Chrome"
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+cask_install google-chrome-canary "Google Chrome Canary"
+alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
 cask_install diffmerge
 cask_install mattermost mattermost
 cask_install intellij-idea "intelliJ IDEA"
