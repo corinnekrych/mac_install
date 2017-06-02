@@ -109,6 +109,9 @@ brew_install glide
 brew_install gnu-getopt
 echo 'export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"' >> ~/.zshrc
 
+brew_install postgres
+brew_install graphviz
+
 cask_install gogland-eap "Gogland 1.0 EAP"
 cask_install iterm2 
 cask_install sublime-text 
