@@ -183,11 +183,18 @@ fi
 # 	sudo unzip openshift-origin-client-tools-v3.6.0-alpha.0-0343989-mac.zip -d /usr/local/oc
 # 	ln -s /usr/local/oc/oc /usr/local/bin/oc
 # fi
+# if [ ! -d "/usr/local/oc" ]; then
+# 	echo "==> Install Openshift oc"
+# 	brew install socat #dependency for oc
+# 	wget https://github.com/openshift/origin/releases/download/v1.4.1/openshift-origin-client-tools-v1.4.1-3f9807a-mac.zip
+# 	sudo unzip openshift-origin-client-tools-v1.4.1-3f9807a-mac.zip -d /usr/local/oc
+# 	ln -s /usr/local/oc/oc /usr/local/bin/oc
+# fi
 if [ ! -d "/usr/local/oc" ]; then
 	echo "==> Install Openshift oc"
 	brew install socat #dependency for oc
-	wget https://github.com/openshift/origin/releases/download/v1.4.1/openshift-origin-client-tools-v1.4.1-3f9807a-mac.zip
-	sudo unzip openshift-origin-client-tools-v1.4.1-3f9807a-mac.zip -d /usr/local/oc
+	wget https://github.com/openshift/origin/releases/download/v1.5.1/openshift-origin-client-tools-v1.5.1-7b451fc-mac.zip
+	sudo unzip openshift-origin-client-tools-v1.5.1-7b451fc-mac.zip -d /usr/local/oc
 	ln -s /usr/local/oc/oc /usr/local/bin/oc
 fi
 # Install HP scan for printer/scanner
