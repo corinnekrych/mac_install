@@ -197,6 +197,21 @@ if [ ! -d "/usr/local/oc" ]; then
 	sudo unzip openshift-origin-client-tools-v1.5.1-7b451fc-mac.zip -d /usr/local/oc
 	ln -s /usr/local/oc/oc /usr/local/bin/oc
 fi
+
+# Install Minishift
+if [ ! -d "/usr/local/minishift" ]; then
+	brew update
+   	brew install --HEAD xhyve
+	brew install docker-machine-driver-xhyve
+	sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+	sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+	echo "==> Install Minishift"
+	wget https://github.com/minishift/minishift/releases/download/v1.3.0/minishift-1.3.0-darwin-amd64.tgz
+	sudo mkdir -p /usr/local/minishift
+	sudo tar -xvzf minishift-1.3.0-darwin-amd64.tgz -C /usr/local/minishift
+	ln -s /usr/local/minishift/minishift /usr/local/bin/minishift
+fi
+
 # Install HP scan for printer/scanner
 echo "==> Install Printer"
 if [ ! -f HP-Inkjet-SW-OSX-Mavericks_v12.34.42.dmg ]; then
