@@ -173,6 +173,12 @@ if [ ! -d "$HOME/.nvm" ]; then
 	nvm alias default v6.5.0
 fi
 
+# Install npm-run.pugin.zsh /Users/corinne/.npm-run.plugin.zsh
+if [ ! -d "$HOME/.npm-run.plugin.zsh" ]; then
+	echo "==> Install npm-run"
+	npm install -g npm-run.plugin.zsh
+fi
+
 # Install OpenShift OC
 # TODO configure docker to add "insecure-registries" : ["172.30.0.0/16"]
 # TODO once available for 3.6.0-alpa0, use: https://github.com/Homebrew/homebrew-core/blob/master/Formula/openshift-cli.rb
