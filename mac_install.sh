@@ -206,6 +206,14 @@ if [ ! -d "/usr/local/oc" ]; then
 fi
 
 # Install Minishift
+if [ ! -d "/usr/local/bin/minikube" ]; then
+	echo "==> Install Minikube"
+	curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.23.0/minikube-darwin-amd64
+	chmod +x minikube
+	sudo mv minikube /usr/local/bin/
+fi
+
+# Install Minishift
 if [ ! -d "/usr/local/minishift" ]; then
 	brew update
    	brew install --HEAD xhyve
