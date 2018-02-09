@@ -5,3 +5,4 @@ colloquy.backup
 *.zip
 .DS_Store
 HP-Inkjet-SW-OSX-Mavericks_v12.34.42.dmg
+*.tgz

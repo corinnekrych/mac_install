@@ -169,10 +169,15 @@ if [ ! -d "$HOME/.nvm" ]; then
 	append_to_file "$HOME/.zshrc" '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm'
 	source "$HOME/.zshrc"
 	nvm install v7.8.0
-	nvm install v4.4.4
-	nvm install v6.5.0
-	nvm alias default v6.5.0
+	nvm install vv8.3.0
+	nvm alias default vv8.3.0
 fi
+if ! app_is_installed_homebrew yarn; then
+	echo "==> Install yarn"
+	# https://yarnpkg.com/en/docs/install add --without-node when nvm is insatlled
+	brew install yarn --without-node
+fi
+
 
 # Install npm-run.pugin.zsh /Users/corinne/.npm-run.plugin.zsh
 if [ ! -d "$HOME/.npm-run.plugin.zsh" ]; then
