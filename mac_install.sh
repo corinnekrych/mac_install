@@ -105,6 +105,7 @@ brew_install glide
 brew_install mercurial
 brew_install bazaar
 brew_install glide
+brew_install kedge
 
 brew_install gnu-getopt
 echo 'export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"' >> ~/.zshrc
