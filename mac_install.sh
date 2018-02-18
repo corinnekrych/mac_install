@@ -113,7 +113,7 @@ brew_install postgres
 brew_install graphviz
 brew_install kubectl
 
-cask_install gogland-eap "Gogland 1.0 EAP"
+cask_install goland "GoLand"
 cask_install iterm2 
 cask_install sublime-text 
 cask_install atom atom
