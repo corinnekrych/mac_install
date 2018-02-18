@@ -6,3 +6,6 @@ git@github.com:fabric8-ui/ngx-fabric8-wit.git
 git@github.com:fabric8-ui/ngx-login-client.git
 git@github.com:fabric8-ui/ngx-widgets.git
 git@github.com:fabric8-ui/ngx-base.git
+git@github.com:Unleash/unleash.git
+git@github.com:Unleash/unleash-frontend.git
+

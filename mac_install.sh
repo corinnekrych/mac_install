@@ -169,15 +169,14 @@ if [ ! -d "$HOME/.nvm" ]; then
 	append_to_file "$HOME/.zshrc" '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm'
 	source "$HOME/.zshrc"
 	nvm install v7.8.0
-	nvm install vv8.3.0
-	nvm alias default vv8.3.0
+	nvm install v8.3.0
+	nvm alias default v8.3.0
 fi
 if ! app_is_installed_homebrew yarn; then
 	echo "==> Install yarn"
 	# https://yarnpkg.com/en/docs/install add --without-node when nvm is insatlled
 	brew install yarn --without-node
 fi
-
 
 # Install npm-run.pugin.zsh /Users/corinne/.npm-run.plugin.zsh
 if [ ! -d "$HOME/.npm-run.plugin.zsh" ]; then
@@ -210,13 +209,13 @@ if [ ! -d "/usr/local/oc" ]; then
 	ln -s /usr/local/oc/oc /usr/local/bin/oc
 fi
 
-# Install Minishift
-if [ ! -d "/usr/local/bin/minikube" ]; then
-	echo "==> Install Minikube"
-	curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.23.0/minikube-darwin-amd64
-	chmod +x minikube
-	sudo mv minikube /usr/local/bin/
-fi
+# Install MiniKube
+#if [ ! -d "/usr/local/bin/minikube" ]; then
+# 	echo "==> Install Minikube"
+# 	curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.23.0/minikube-darwin-amd64
+# 	chmod +x minikube
+# 	sudo mv minikube /usr/local/bin/
+# fi
 
 # Install Minishift
 if [ ! -d "/usr/local/minishift" ]; then
@@ -226,9 +225,9 @@ if [ ! -d "/usr/local/minishift" ]; then
 	sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
 	sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
 	echo "==> Install Minishift"
-	wget https://github.com/minishift/minishift/releases/download/v1.3.0/minishift-1.3.0-darwin-amd64.tgz
+	wget https://github.com/minishift/minishift/releases/download/v1.3.1/minishift-1.3.1-darwin-amd64.tgz
 	sudo mkdir -p /usr/local/minishift
-	sudo tar -xvzf minishift-1.3.0-darwin-amd64.tgz -C /usr/local/minishift
+	sudo tar -xvzf minishift-1.3.1-darwin-amd64.tgz -C /usr/local/minishift
 	ln -s /usr/local/minishift/minishift /usr/local/bin/minishift
 fi
 
@@ -293,6 +292,15 @@ fi
 if [ -f "./colloquy.backup" ]; then
 	echo "==> Import IRC chat settings"
 	defaults import info.colloquy colloquy.backup
+fi
+
+if [ ! -f Tunnelblick_3.7.4b_build_4921.dmg ]; then
+	wget https://tunnelblick.net/release/Tunnelblick_3.7.4b_build_4921.dmg
+	echo "tunnelblick required manual install..."
+	# hdiutil attach Tunnelblick_3.7.4b_build_4921.dmg
+	# cp "/Volumes/Tunnelblick/Tunnelblick.app" /Applications
+	# hdiutil detach "/Volumes/Tunnelblick"
+	popd
 fi
 
 # Set-up workspace with relevant git repos
