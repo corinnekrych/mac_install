@@ -252,6 +252,7 @@ if ! app_is_installed 'Xcode'; then
 	mas signin $APPLE_ID "$PASSWORD"
 	echo "==> Install Xcode"
 	install "Xcode"
+	sudo xcodebuild -license accept
 	echo "==> mMke xcodebuild available"
 	sudo xcode-select -switch /Applications/Xcode.app 
 fi
