@@ -5,7 +5,8 @@ The awsome script that turns your mac into a killer development machine.
 
 My dev profile is: 
 - mobile dev (Xcode, CocoaPods, Cordova)
-- JavaScript dev (nvm, node)
+- JavaScript dev (nvm, nodejs)
+- golang (gvm)
 
 ## Customize script
 

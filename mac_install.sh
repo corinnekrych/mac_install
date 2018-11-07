@@ -162,6 +162,15 @@ if [ ! -d "$HOME/.rvm" ]; then
 	rvm install 2.3.0 --disable-binary
 fi
 
+# Install GVM fro golang environment
+if [ ! -d "$HOME/.gvm" ]; then
+	echo "==> Install gvm"
+	zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+	source "$HOME/.zshrc"
+	gvm install go1.10.5
+	gvm use go1.10.5 --default
+fi
+
 # Install JavaScript environment
 if [ ! -d "$HOME/.nvm" ]; then
 	echo "==> Install nvm"
