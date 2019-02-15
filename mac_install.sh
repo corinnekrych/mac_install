@@ -214,8 +214,8 @@ fi
 if [ ! -d "/usr/local/oc" ]; then
 	echo "==> Install Openshift oc"
 	brew install socat #dependency for oc
-	wget https://github.com/openshift/origin/releases/download/v3.6.1/openshift-origin-client-tools-v3.6.1-008f2d5-mac.zip
-	sudo unzip openshift-origin-client-tools-v3.6.1-008f2d5-mac.zip -d /usr/local/oc
+	wget https://github.com/openshift/origin/releases/download/v3.11.0/openshift-origin-client-tools-v3.11.0-0cbc58b-mac.zip
+	sudo unzip openshift-origin-client-tools-v3.11.0-0cbc58b-mac.zip -d /usr/local/oc
 	ln -s /usr/local/oc/oc /usr/local/bin/oc
 fi
 
