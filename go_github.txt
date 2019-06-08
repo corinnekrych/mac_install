@@ -4,3 +4,4 @@ git@github.com:fabric8-services/fabric8-toggles-service.git
 git@github.com:redhat-developer/devconsole-api.git
 git@github.com:redhat-developer/devconsole-operator.git
 git@github.com:redhat-developer/devopsconsole-operator.git
+git@github.com:operator-framework/operator-sdk.git

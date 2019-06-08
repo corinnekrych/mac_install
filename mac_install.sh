@@ -101,6 +101,7 @@ brew_install gpg
 brew_install zsh zsh-completions 
 brew_install git
 brew_install go
+brew_install dep
 brew_install glide
 brew_install mercurial
 brew_install bazaar
