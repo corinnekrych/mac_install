@@ -168,7 +168,8 @@ if [ ! -d "$HOME/.gvm" ]; then
 	zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 	source "$HOME/.zshrc"
 	gvm install go1.10.5
-	gvm use go1.10.5 --default
+	gvm install go1.12.5	
+	gvm use go1.12.5 --default
 fi
 
 # Install JavaScript environment
