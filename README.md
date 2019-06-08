@@ -46,3 +46,4 @@ clone_repo "feedhenry"
 ```
 . ./mac_install.sh
 ```
+> NOTE: you may have to fix version issue and re-run the script. Some nanual steps might be required like `Error: You have not agreed to the Xcode license. Please resolve this by running: sudo xcodebuild -license accept`

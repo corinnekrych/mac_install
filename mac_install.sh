@@ -185,8 +185,8 @@ if [ ! -d "$HOME/.nvm" ]; then
 fi
 if ! app_is_installed_homebrew yarn; then
 	echo "==> Install yarn"
-	# https://yarnpkg.com/en/docs/install add --without-node when nvm is insatlled
-	brew install yarn --without-node
+	# https://yarnpkg.com/en/docs/install 
+	brew install yarn
 fi
 
 # Install npm-run.pugin.zsh /Users/corinne/.npm-run.plugin.zsh
