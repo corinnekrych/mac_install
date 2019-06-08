@@ -105,7 +105,7 @@ brew_install glide
 brew_install mercurial
 brew_install bazaar
 brew_install glide
-brew_install kedge
+# brew_install kedge
 
 brew_install gnu-getopt
 echo 'export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"' >> ~/.zshrc
@@ -141,11 +141,11 @@ if [ ! -d "$HOME/workspace/go" ]; then
 	append_to_file "$HOME/.zshrc" 'export GOPATH=$HOME/workspace/go'
 fi
 
-if ! app_is_installed_cask 'blue-jeans-launcher'; then
-	echo "==> Setup for BlueJeans app"
-	brew cask install blue-jeans-launcher
-	open /usr/local/Caskroom/blue-jeans-launcher/1.6.8/Blue\ Jeans\ Launcher.app
-fi
+# if ! app_is_installed_cask 'blue-jeans-launcher'; then
+# 	echo "==> Setup for BlueJeans app"
+# 	brew cask install blue-jeans-launcher
+# 	open /usr/local/Caskroom/blue-jeans-launcher/1.6.8/Blue\ Jeans\ Launcher.app
+# fi
 
 # Install oh-my-zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -162,7 +162,7 @@ if [ ! -d "$HOME/.rvm" ]; then
 	rvm install 2.3.0 --disable-binary
 fi
 
-# Install GVM fro golang environment
+# Install GVM for golang environment
 if [ ! -d "$HOME/.gvm" ]; then
 	echo "==> Install gvm"
 	zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
@@ -178,9 +178,9 @@ if [ ! -d "$HOME/.nvm" ]; then
 	append_to_file "$HOME/.zshrc" 'export NVM_DIR="$HOME/.nvm"'
 	append_to_file "$HOME/.zshrc" '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm'
 	source "$HOME/.zshrc"
-	nvm install v7.8.0
+	nvm install v10.15.1
 	nvm install v8.3.0
-	nvm alias default v8.3.0
+	nvm alias default v10.15.1
 fi
 if ! app_is_installed_homebrew yarn; then
 	echo "==> Install yarn"
@@ -194,63 +194,29 @@ if [ ! -d "$HOME/.npm-run.plugin.zsh" ]; then
 	npm install -g npm-run.plugin.zsh
 fi
 
-# Install OpenShift OC
-# TODO configure docker to add "insecure-registries" : ["172.30.0.0/16"]
-# TODO once available for 3.6.0-alpa0, use: https://github.com/Homebrew/homebrew-core/blob/master/Formula/openshift-cli.rb
-# if [ ! -d "/usr/local/oc" ]; then
-#   echo "==> Install Openshift oc"
-# 	brew install socat #dependency for oc
-# 	wget https://github.com/openshift/origin/releases/download/v3.6.0-alpha.0/openshift-origin-client-tools-v3.6.0-alpha.0-0343989-mac.zip
-# 	sudo unzip openshift-origin-client-tools-v3.6.0-alpha.0-0343989-mac.zip -d /usr/local/oc
-# 	ln -s /usr/local/oc/oc /usr/local/bin/oc
-# fi
-# if [ ! -d "/usr/local/oc" ]; then
-# 	echo "==> Install Openshift oc"
-# 	brew install socat #dependency for oc
-# 	wget https://github.com/openshift/origin/releases/download/v1.4.1/openshift-origin-client-tools-v1.4.1-3f9807a-mac.zip
-# 	sudo unzip openshift-origin-client-tools-v1.4.1-3f9807a-mac.zip -d /usr/local/oc
-# 	ln -s /usr/local/oc/oc /usr/local/bin/oc
-# fi
 if [ ! -d "/usr/local/oc" ]; then
 	echo "==> Install Openshift oc"
 	brew install socat #dependency for oc
-	wget https://github.com/openshift/origin/releases/download/v3.6.1/openshift-origin-client-tools-v3.6.1-008f2d5-mac.zip
-	sudo unzip openshift-origin-client-tools-v3.6.1-008f2d5-mac.zip -d /usr/local/oc
+	wget https://github.com/openshift/origin/releases/download/v3.11.0/openshift-origin-client-tools-v3.11.0-0cbc58b-mac.zip
+	sudo unzip openshift-origin-client-tools-v3.11.0-0cbc58b-mac.zip -d /usr/local/oc
 	ln -s /usr/local/oc/oc /usr/local/bin/oc
 fi
 
 # Install MiniKube
-#if [ ! -d "/usr/local/bin/minikube" ]; then
-# 	echo "==> Install Minikube"
-# 	curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.23.0/minikube-darwin-amd64
-# 	chmod +x minikube
-# 	sudo mv minikube /usr/local/bin/
-# fi
-
-# Install Minishift
-if [ ! -d "/usr/local/minishift" ]; then
+if [ ! -d "/usr/local/bin/minikube" ]; then
+	echo "==> Install Minikube"
 	brew update
-   	brew install --HEAD xhyve
+  brew install --HEAD xhyve
 	brew install docker-machine-driver-xhyve
-	brew cask install minishift
-	# sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
-	# sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
-	# echo "==> Install Minishift"
-	# wget https://github.com/minishift/minishift/releases/download/v1.3.1/minishift-1.3.1-darwin-amd64.tgz
-	# sudo mkdir -p /usr/local/minishift
-	# sudo tar -xvzf minishift-1.3.1-darwin-amd64.tgz -C /usr/local/minishift
-	# ln -s /usr/local/minishift/minishift /usr/local/bin/minishift
+	brew cask install minikube
 fi
 
-# Install HP scan for printer/scanner
-echo "==> Install Printer"
-if [ ! -f HP-Inkjet-SW-OSX-Mavericks_v12.34.42.dmg ]; then
-	wget http://ftp.hp.com/pub/softlib/software12/COL51745/mp-125206-3/HP-Inkjet-SW-OSX-Mavericks_v12.34.42.dmg
-	hdiutil attach HP-Inkjet-SW-OSX-Mavericks_v12.34.42.dmg
-	pushd "/Volumes/HP Inkjet SW OSX Mavericks"
-	sudo installer -pkg "HP Inkjet SW OSX Mavericks.pkg" -target "/"
-	hdiutil detach "/Volumes/HP Inkjet SW OSX Mavericks"
-	popd
+# Install Minishift
+if [ ! -d "/usr/local/bin/minishift" ]; then
+	brew update
+  brew install --HEAD xhyve
+	brew install docker-machine-driver-xhyve
+	brew cask install minishift
 fi
 
 # Install with mas
@@ -305,8 +271,8 @@ if [ -f "./colloquy.backup" ]; then
 	defaults import info.colloquy colloquy.backup
 fi
 
-if [ ! -f Tunnelblick_3.7.4b_build_4921.dmg ]; then
-	wget https://tunnelblick.net/release/Tunnelblick_3.7.4b_build_4921.dmg
+if [ ! -f Tunnelblick_3.7.9a_build_5321.dmg ]; then
+	wget https://tunnelblick.net/release/Tunnelblick_3.7.9a_build_5321.dmg
 	echo "tunnelblick required manual install..."
 	# hdiutil attach Tunnelblick_3.7.4b_build_4921.dmg
 	# cp "/Volumes/Tunnelblick/Tunnelblick.app" /Applications
@@ -350,10 +316,8 @@ function clone_repo () {
 	done
 	cd  $current_dir
 }
-echo "==> Clone feedhenry repos"
-clone_repo "feedhenry"
-echo "==> Clone devtools platform repos"
-clone_repo "devtools"
+# echo "==> Clone devtools platform repos"
+# clone_repo "devtools"
 echo "==> Clone corinnekrych repos"
 clone_repo "corinne"
 echo "==> Clone go repos"
