@@ -106,6 +106,7 @@ brew_install glide
 brew_install mercurial
 brew_install bazaar
 brew_install glide
+brew_install operator-sdk
 # brew_install kedge
 
 brew_install gnu-getopt
