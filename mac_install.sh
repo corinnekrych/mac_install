@@ -113,8 +113,6 @@ brew_install gnu-getopt
 echo 'export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"' >> ~/.zshrc
 
 brew_install postgres
-brew_install graphviz
-brew_install kubectl
 
 cask_install goland "GoLand"
 cask_install iterm2 
@@ -209,15 +207,27 @@ fi
 if [ ! -d "/usr/local/bin/minikube" ]; then
 	echo "==> Install Minikube"
 	brew update
-  brew install --HEAD xhyve
-	brew install docker-machine-driver-xhyve
+	brew install hyperkit
+	curl -LO https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-hyperkit \
+	&& sudo install -o root -g wheel -m 4755 docker-machine-driver-hyperkit /usr/local/bin/
 	brew cask install minikube
+fi
+
+# Install GCP sdk
+if [ ! -d "~/google-cloud-sdk/bin" ]; then
+	echo "==> Install Google Cloud Platform"
+	current_dir=$(pwd)
+	cd ~
+	wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-250.0.0-darwin-x86_64.tar.gz
+    gunzip -c google-cloud-sdk-250.0.0-darwin-x86_64.tar.gz | tar xopf -
+	google-cloud-sdk/bin/gcloud init
+	cd  $current_dir
 fi
 
 # Install Minishift
 if [ ! -d "/usr/local/bin/minishift" ]; then
 	brew update
-  brew install --HEAD xhyve
+    brew install --HEAD xhyve
 	brew install docker-machine-driver-xhyve
 	brew cask install minishift
 fi
