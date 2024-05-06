@@ -13,8 +13,8 @@ fi
 
 # Install cask for brew
 echo "==> Install Cask"
-brew tap caskroom/cask
-brew tap caskroom/versions
+brew tap homebrew/cask
+brew tap homebrew/cask-versions
 
 # Update brew
 echo "==> Update Homebrew"
@@ -71,7 +71,7 @@ function cask_install() {
 	if ! app_is_installed_cask $1; then
 		if ! app_is_installed $1; then
 			echo "==> Install $1"
-			brew cask install $1
+			brew install --cask $1
 			if [[ $2 ]]; then 
 				echo "==>==> Dock $2"
 				defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/$2.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
@@ -102,12 +102,9 @@ brew_install zsh zsh-completions
 brew_install git
 brew_install go
 brew_install dep
-brew_install glide
 brew_install mercurial
 brew_install bazaar
-brew_install glide
 brew_install operator-sdk
-# brew_install kedge
 
 brew_install gnu-getopt
 echo 'export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"' >> ~/.zshrc
@@ -140,12 +137,6 @@ if [ ! -d "$HOME/workspace/go" ]; then
 	mkdir -p $HOME/workspace/go
 	append_to_file "$HOME/.zshrc" 'export GOPATH=$HOME/workspace/go'
 fi
-
-# if ! app_is_installed_cask 'blue-jeans-launcher'; then
-# 	echo "==> Setup for BlueJeans app"
-# 	brew cask install blue-jeans-launcher
-# 	open /usr/local/Caskroom/blue-jeans-launcher/1.6.8/Blue\ Jeans\ Launcher.app
-# fi
 
 # Install oh-my-zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -210,7 +201,7 @@ if [ ! -d "/usr/local/bin/minikube" ]; then
 	brew install hyperkit
 	curl -LO https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-hyperkit \
 	&& sudo install -o root -g wheel -m 4755 docker-machine-driver-hyperkit /usr/local/bin/
-	brew cask install minikube
+	brew install --cask  minikube
 fi
 
 # Install GCP sdk
@@ -229,7 +220,7 @@ if [ ! -d "/usr/local/bin/minishift" ]; then
 	brew update
     brew install --HEAD xhyve
 	brew install docker-machine-driver-xhyve
-	brew cask install minishift
+	brew install --cask minishift
 fi
 
 # Install with mas
